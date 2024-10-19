@@ -1,0 +1,59 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Table Booking System API",
+      "version": "1.0.0",
+      "description": "API documentation for Table Booking System"
+    },
+    "basePath": "/api",
+    "paths": {
+      "/initialize-empty-tables": {
+        "post": {
+          "summary": "Initialize restaurant tables",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/InitializeTablesRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Tables initialized successfully",
+              "schema": {
+                "$ref": "#/definitions/InitializeTablesResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "InitializeTablesRequest": {
+        "type": "object",
+        "properties": {
+          "table_count": {
+            "type": "integer"
+          },
+          "max_reserve_percentage": {
+            "type": "number"
+          }
+        }
+      },
+      "InitializeTablesResponse": {
+        "type": "object",
+        "properties": {
+          "table_count": {
+            "type": "integer"
+          },
+          "max_reserve_seat": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+  
