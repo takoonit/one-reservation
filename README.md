@@ -15,7 +15,7 @@ A simple table reservation system built with Node.js, Express.js, and Kafka. Thi
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v20.x or higher)
 - npm or yarn
 - Docker and Docker Compose
 
@@ -24,7 +24,7 @@ A simple table reservation system built with Node.js, Express.js, and Kafka. Thi
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/one-reservation.git
+git clone https://github.com/takoonit/one-reservation.git
 cd one-reservation
 ```
 2. Install dependencies:
