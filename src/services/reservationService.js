@@ -11,10 +11,16 @@ const {logger} = require("../config/logger");
  * @throws {AppError} - Throws an error if reservation cannot be made (e.g., not enough tables, invalid count).
  */
 const reserveTables = async (customerCount, contactNo) => {
+	// Validate missing parameters
+	if (typeof customerCount === 'undefined' || typeof contactNo === 'undefined') {
+		throw errorTypes.MISSING_PARAMETERS;
+	}
+
 	// Check if the system is initialized
 	if (!reservationStorage.isStorageInitialized()) {
 		throw errorTypes.TABLES_NOT_INITIALIZED;
 	}
+
 	// Validate customer count
 	if (customerCount <= 0) {
 		throw errorTypes.INVALID_CUSTOMER_COUNT;
@@ -60,6 +66,11 @@ const reserveTables = async (customerCount, contactNo) => {
  * @throws {AppError} - Throws an error if the booking is not found.
  */
 const cancelBooking = async (bookingId) => {
+	// Validate missing parameters
+	if (typeof bookingId === 'undefined') {
+		throw errorTypes.MISSING_PARAMETERS;
+	}
+
 	// Check if the system is initialized
 	if (!reservationStorage.isStorageInitialized()) {
 		throw errorTypes.TABLES_NOT_INITIALIZED;

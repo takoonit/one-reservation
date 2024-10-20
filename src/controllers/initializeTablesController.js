@@ -24,6 +24,40 @@ const initializeTables = (req, res) => {
 module.exports = {initializeTables};
 /**
  * @swagger
+ * tags:
+ *   name: Initialization
+ *   description: The reservation API for initialize data.
+ */
+
+/**
+ * @swagger
+ * /api/initialize-tables:
+ *   post:
+ *     summary: Initialize tables for reservation
+ *     tags: [Initialization]
+ *     description: Initializes the restaurant tables with the given count.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/InitializeTablesRequest'
+ *     responses:
+ *       200:
+ *         description: Tables initialized successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/InitializeTablesResponse'
+ *       400:
+ *         description: Bad request, invalid input.
+ *       409:
+ *         description: Conflict, tables already initialized.
+ *       500:
+ *         description: Internal server error.
+ */
+/**
+ * @swagger
  * components:
  *   schemas:
  *     InitializeTablesRequest:

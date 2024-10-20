@@ -30,7 +30,8 @@ const errorMessages = {
     INVALID_CUSTOMER_COUNT: "Invalid customer count.",
     NOT_ENOUGH_TABLES: "Not enough tables available.",
     MAX_RESERVATION_EXCEEDED: "Requested seats exceed the allowed limit per one reservation.",
-    BOOKING_NOT_FOUND: "Booking ID Not Found."
+    BOOKING_NOT_FOUND: "Booking ID Not Found.",
+    MISSING_PARAMETERS: "Missing required parameters."
 };
 
 /**
@@ -45,7 +46,8 @@ const errorTypes = {
     INVALID_CUSTOMER_COUNT: new AppError(errorMessages.INVALID_CUSTOMER_COUNT, 400),
     NOT_ENOUGH_TABLES: new AppError(errorMessages.NOT_ENOUGH_TABLES, 400),
     MAX_RESERVATION_EXCEEDED: (extra) => new AppError(errorMessages.MAX_RESERVATION_EXCEEDED, 409, this.extra),
-    BOOKING_NOT_FOUND: new AppError(errorMessages.NOT_ENOUGH_TABLES, 409)
+    BOOKING_NOT_FOUND: new AppError(errorMessages.BOOKING_NOT_FOUND, 409),
+    MISSING_PARAMETERS: new AppError(errorMessages.MISSING_PARAMETERS, 400),
 };
 
 module.exports = {

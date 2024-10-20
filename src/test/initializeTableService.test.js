@@ -1,5 +1,3 @@
-// /src/tests/initializeTablesService.test.js
-
 const {initializeTablesService} = require("../services/initializeTablesService");
 const {reservationStorage} = require("../storage/ReservationStorage");
 const {errorTypes} = require("../utils/errorUtils");

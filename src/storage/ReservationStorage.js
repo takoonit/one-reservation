@@ -1,4 +1,4 @@
-const { errorTypes } = require("../utils/errorUtils");
+const {errorTypes} = require("../utils/errorUtils");
 
 class ReservationStorage {
 	constructor() {
@@ -41,7 +41,7 @@ class ReservationStorage {
 			throw errorTypes.NOT_ENOUGH_TABLES;
 		}
 		this.availableTableCount -= tablesReserved;
-		this.bookings[bookingId] = { tablesReserved, customerCount, contactNo };
+		this.bookings[bookingId] = {tablesReserved, customerCount, contactNo};
 	}
 
 	/**
@@ -55,19 +55,18 @@ class ReservationStorage {
 
 	/**
 	 * Free the reserved tables by a booking ID.
-	 * @param {string} bookingId 
+	 * @param {string} bookingId
 	 */
 	releaseTablesByBookingId(bookingId) {
 		const booking = this.bookings[bookingId];
 		if (!booking) {
 			throw errorTypes.BOOKING_NOT_FOUND;
 		}
+		// Remove the booking from storage
+		delete this.bookings[bookingId];
 
 		// Increase available tables by the reserved tables count
 		this.availableTableCount += booking.tablesReserved;
-
-		// Remove the booking from storage
-		delete this.bookings[bookingId];
 	}
 
 	/**
@@ -117,4 +116,4 @@ class ReservationStorage {
 // Singleton instance
 const reservationStorage = new ReservationStorage();
 
-module.exports = { reservationStorage };
+module.exports = {reservationStorage};
