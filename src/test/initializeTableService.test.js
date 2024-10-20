@@ -22,7 +22,7 @@ describe("initializeTablesService", () => {
 
         // Assert
         // Ensure the initialization happens correctly
-        expect(reservationStorage.initialize).toHaveBeenCalledWith(10, 5);
+        expect(reservationStorage.initializeTables).toHaveBeenCalledWith(10, 5);
         expect(result).toEqual({
             table_count: 10,
             max_allowed_per_reservation: 5,  // 50% of 10 tables
