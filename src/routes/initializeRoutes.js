@@ -1,6 +1,38 @@
 const express = require("express");
 const router = express.Router();
-const {initializeTables} = require("../controllers/initializeController");
+const {initializeTables} = require("../controllers/initializeTablesController");
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     InitializeTablesRequest:
+ *       type: object
+ *       required:
+ *         - table_count
+ *         - max_reserve_percentage
+ *       properties:
+ *         table_count:
+ *           type: integer
+ *           description: Number of available tables
+ *           example: 66
+ *         max_reserve_percentage:
+ *           type: number
+ *           description: Maximum reserve limit- X% of tables (e.g., 0.2 is 20%)
+ *           example: 0.2
+ *     InitializeTablesResponse:
+ *       type: object
+ *       properties:
+ *         table_count:
+ *           type: integer
+ *           description: Number of available tables
+ *           example: 66
+ *         max_reserve_seat:
+ *           type: integer
+ *           description: Maximum seat reserve limit per request
+ *           example: 52
+ */
 
 /**
  * @swagger
@@ -8,34 +40,19 @@ const {initializeTables} = require("../controllers/initializeController");
  *   post:
  *     summary: Initialize tables for reservation
  *     description: Initializes the restaurant tables with the given count.
- *     parameters:
- *       - in: body
- *         name: body
- *         description: Table count and max reserve percentage.
- *         required: true
- *         schema:
- *           type: object
- *           properties:
- *             table_count:
- *               type: integer
- *               example: 66
- *             max_reserve_percentage:
- *               type: number
- *               example: 0.2
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/InitializeTablesRequest'
  *     responses:
  *       200:
  *         description: Tables initialized successfully.
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 table_count:
- *                   type: integer
- *                   example: 66
- *                 max_reserve_seat:
- *                   type: integer
- *                   example: 52
+ *               $ref: '#/components/schemas/InitializeTablesResponse'
  *       400:
  *         description: Bad request, invalid input.
  *       409:
