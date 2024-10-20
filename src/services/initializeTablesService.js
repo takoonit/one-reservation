@@ -14,7 +14,7 @@ const {logger} = require("../config/logger");
 function initializeTablesService(tableCount, maxAllowedPercentage = 0) {
     logger.info(`Initializing tables with count: ${tableCount} and maxAllowedPercentage: ${maxAllowedPercentage}`);
 
-    if (reservationStorage.isInitialized()) {
+    if (reservationStorage.isStorageInitialized()) {
         logger.error("Tables are already initialized");
         throw errorTypes.TABLES_ALREADY_INITIALIZED;
     }
@@ -29,10 +29,10 @@ function initializeTablesService(tableCount, maxAllowedPercentage = 0) {
         throw errorTypes.INVALID_MAX_ALLOWED_PERCENTAGE;
     }
 
-    const maxReserveSeats = Math.floor(tableCount * maxAllowedPercentage); 
+    const maxReserveSeats = Math.floor(tableCount * maxAllowedPercentage);
 
     // Initialize tables and set max reserve seats based on the given percentage
-    reservationStorage.initializeStorage(tableCount, maxReserveSeats);
+    reservationStorage.initializeTables(tableCount, maxReserveSeats);
 
     logger.info(`Tables initialized successfully with count: ${tableCount} and maxAllowedPercentage: ${maxAllowedPercentage}`);
 
