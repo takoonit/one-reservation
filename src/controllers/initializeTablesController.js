@@ -30,7 +30,6 @@ module.exports = {initializeTables};
  *       type: object
  *       required:
  *         - table_count
- *         - max_allowed_percentage
  *       properties:
  *         table_count:
  *           type: integer
