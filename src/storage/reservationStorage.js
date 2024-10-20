@@ -1,3 +1,5 @@
+const {errorTypes} = require("../utils/errorUtils");
+
 class ReservationStorage {
     constructor() {
         this.reset();
@@ -9,9 +11,32 @@ class ReservationStorage {
      * @param {number} maxReserveSeats - Maximum number of reserve seats allowed.
      */
     initialize(tableCount, maxReserveSeats) {
+        if (typeof tableCount !== 'number' || typeof maxReserveSeats !== 'number' || tableCount <= 0 || maxReserveSeats < 0) {
+            throw new Error("Invalid parameters for initialization.");
+        }
         this.tableCount = tableCount;
+        this.availableTableCount = tableCount;
         this.maxReserveSeats = maxReserveSeats;
+        this.isCheckMaxReserved = maxReserveSeats > 0;
         this._isInitialized = true;
+    }
+
+    /**
+     * Store Booking data.
+     * @param {string} bookingId - Unique Booking ID.
+     * @param {number} tablesReserved - Number of tables reserved.
+     * @param {number} customerCount - The number of customers wanting to reserve tables.
+     * @param {string} contactNo - Contact Number.
+     */
+    addBooking(bookingId, tablesReserved, customerCount, contactNo) {
+        if (!this._isInitialized) {
+            throw errorTypes.TABLES_NOT_INITIALIZED;
+        }
+        if (tablesReserved > this.availableTableCount) {
+            throw errorTypes.NOT_ENOUGH_TABLES;
+        }
+        this.availableTableCount -= tablesReserved;
+        this.bookings[bookingId] = {tablesReserved, customerCount, contactNo};
     }
 
     /**
@@ -31,6 +56,14 @@ class ReservationStorage {
     }
 
     /**
+     * Get the total number of availables tables.
+     * @returns {number} - Total number of empty tables.
+     */
+    getAvailableTableCount() {
+        return this.availableTableCount;
+    }
+
+    /**
      * Get the maximum reserve seats allowed.
      * @returns {number} - Maximum number of reserve seats.
      */
@@ -45,6 +78,8 @@ class ReservationStorage {
         this.tableCount = 0;
         this.maxReserveSeats = 0;
         this._isInitialized = false;
+        this.bookings = {}; // Store bookings by bookingId
+        this.availableTableCount = 0;
     }
 }
 

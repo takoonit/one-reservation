@@ -15,7 +15,7 @@ function setupSwagger(app) {
                 description: 'API for managing table reservations for a restaurant.',
             },
         },
-        apis: ['./src/routes/*.js'], // Path to the API documentation files
+        apis: ['./src/routes/*.js', './src/controllers/*.js'], // Path to the API documentation files
     });
 
     // Serve the Swagger UI at the `/api-docs` route

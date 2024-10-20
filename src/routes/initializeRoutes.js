@@ -1,37 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const {initializeTables} = require("../controllers/initializeTablesController");
+const {reservationController} = require("../controllers/reservationController");
 
+router.post("/reserve", reservationController);
+router.post("/initialize-tables", initializeTables);
 
+const initializeRoutes = (app) => {
+ app.use("/api", router);
+};
+
+module.exports = {initializeRoutes};
 /**
  * @swagger
- * components:
- *   schemas:
- *     InitializeTablesRequest:
- *       type: object
- *       required:
- *         - table_count
- *         - max_reserve_percentage
- *       properties:
- *         table_count:
- *           type: integer
- *           description: Number of available tables
- *           example: 66
- *         max_reserve_percentage:
- *           type: number
- *           description: Maximum reserve limit- X% of tables (e.g., 0.2 is 20%)
- *           example: 0.2
- *     InitializeTablesResponse:
- *       type: object
- *       properties:
- *         table_count:
- *           type: integer
- *           description: Number of available tables
- *           example: 66
- *         max_reserve_seat:
- *           type: integer
- *           description: Maximum seat reserve limit per request
- *           example: 52
+ * tags:
+ *   name: Initialization
+ *   description: The reservation API for initialize data.
  */
 
 /**
@@ -39,6 +23,7 @@ const {initializeTables} = require("../controllers/initializeTablesController");
  * /api/initialize-tables:
  *   post:
  *     summary: Initialize tables for reservation
+ *     tags: [Initialization]
  *     description: Initializes the restaurant tables with the given count.
  *     requestBody:
  *       required: true
@@ -60,10 +45,35 @@ const {initializeTables} = require("../controllers/initializeTablesController");
  *       500:
  *         description: Internal server error.
  */
-router.post("/initialize-tables", initializeTables);
 
-const initializeRoutes = (app) => {
- app.use("/api", router);
-};
+/**
+ * @swagger
+ * tags:
+ *   name: Reservations
+ *   description: The reservation API to manage table bookings
+ */
 
-module.exports = {initializeRoutes};
+/**
+ * @swagger
+ * /api/reserve:
+ *   post:
+ *     summary: Reserve tables for customers.
+ *     tags: [Reservations]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Reservation'
+ *     responses:
+ *       200:
+ *         description: Reservation successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ReservationResponse'
+ *       400:
+ *         $ref: '#/components/responses/400'
+ *       500:
+ *         $ref: '#/components/responses/500'
+ */
