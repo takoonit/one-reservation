@@ -44,7 +44,7 @@ const errorTypes = {
     TABLES_NOT_INITIALIZED: new AppError(errorMessages.TABLES_NOT_INITIALIZED, 409),
     INVALID_CUSTOMER_COUNT: new AppError(errorMessages.INVALID_CUSTOMER_COUNT, 400),
     NOT_ENOUGH_TABLES: new AppError(errorMessages.NOT_ENOUGH_TABLES, 400),
-    MAX_RESERVATION_EXCEEDED: (extra) => new AppError(errorMessages.MAX_RESERVATION_EXCEEDED, 400, this.extra),
+    MAX_RESERVATION_EXCEEDED: (extra) => new AppError(errorMessages.MAX_RESERVATION_EXCEEDED, 409, this.extra),
     BOOKING_NOT_FOUND: new AppError(errorMessages.NOT_ENOUGH_TABLES, 409)
 };
 
