@@ -36,7 +36,7 @@ const {initializeTables} = require("../controllers/initializeTablesController");
 
 /**
  * @swagger
- * /initialize-tables:
+ * /api/initialize-tables:
  *   post:
  *     summary: Initialize tables for reservation
  *     description: Initializes the restaurant tables with the given count.
