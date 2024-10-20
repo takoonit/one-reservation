@@ -17,6 +17,9 @@ importers:
       cors:
         specifier: ^2.8.5
         version: 2.8.5
+      custom-uuid:
+        specifier: ^3.0.0
+        version: 3.0.0
       debug:
         specifier: ~2.6.9
         version: 2.6.9
@@ -842,6 +845,10 @@ packages:
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
+
+  custom-uuid@3.0.0:
+    resolution: {integrity: sha512-SUxQRnWY6jK9lrZBtTcrkH1Ct5Ym4qMKQ/53G1f7FMROyHupm3Z75bBuQqmZmbMt4BXg3kwKAnK8+mvEi+aJUA==}
+    engines: {node: '>=14.17.0'}
 
   debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -3195,6 +3202,8 @@ snapshots:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  custom-uuid@3.0.0: {}
 
   debug@2.6.9:
     dependencies:
