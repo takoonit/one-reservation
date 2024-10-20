@@ -25,7 +25,7 @@ describe("initializeTablesService", () => {
         expect(reservationStorage.initialize).toHaveBeenCalledWith(10, 5);
         expect(result).toEqual({
             table_count: 10,
-            max_reserve_seat: 5,  // 50% of 10 tables
+            max_allowed_per_reservation: 5,  // 50% of 10 tables
         });
     });
 
@@ -51,10 +51,10 @@ describe("initializeTablesService", () => {
 
         // Test for maxReservePercentage <= 0
         expect(() => initializeTablesService(10, 0))
-            .toThrow(errorTypes.INVALID_MAX_RESERVE_PERCENTAGE);
+            .toThrow(errorTypes.INVALID_MAX_ALLOWED_PERCENTAGE);
 
         // Test for maxReservePercentage > 1
         expect(() => initializeTablesService(10, 1.5))
-            .toThrow(errorTypes.INVALID_MAX_RESERVE_PERCENTAGE);
+            .toThrow(errorTypes.INVALID_MAX_ALLOWED_PERCENTAGE);
     });
 });

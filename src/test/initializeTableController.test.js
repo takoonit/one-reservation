@@ -24,7 +24,7 @@ afterAll(() => {
 });
 
 describe("POST /initialize-tables", () => {
-    afterEach(() => {
+    afterAll(() => {
         jest.clearAllMocks();
     });
     it("should successfully initialize tables", async () => {
@@ -32,7 +32,7 @@ describe("POST /initialize-tables", () => {
         // Mock the service response
         const mockResponse = {
             table_count: 66,
-            max_reserve_seat: 52,
+            max_allowed_per_reservation: 13,
         };
 
         initializeTablesService.mockReturnValueOnce(mockResponse);
@@ -43,14 +43,15 @@ describe("POST /initialize-tables", () => {
             .post("/initialize-tables")
             .send({
                 table_count: 66,
-                max_reserve_percentage: 0.2,
+                max_allowed_percentage: 0.2,
             });
 
         // Assert:
-        // Verify table count, max_reserve_seat and http status
+        // Verify table count,  max_allowed_per_reservation and http status
         expect(response.status).toBe(200);
+        console.log(response.body);
         expect(response.body.table_count).toBe(66);
-        expect(response.body.max_reserve_seat).toBe(52);
+        expect(response.body.max_allowed_per_reservation).toBe(13);
     });
 
     it("should return error if table count is invalid", async () => {
@@ -95,11 +96,11 @@ describe("POST /initialize-tables", () => {
         expect(response.body.message).toBe(errorTypes.TABLES_ALREADY_INITIALIZED.message);
     });
 
-    it("should return error if max_reserve_percentage is invalid", async () => {
+    it("should return error if max_allowed_percentage is invalid", async () => {
         // Arrange:
-        // Mock the service to throw error for invalid max_reserve_percentage
+        // Mock the service to throw error for invalid max_allowed_percentage
         initializeTablesService.mockImplementationOnce(() => {
-            throw errorTypes.INVALID_MAX_RESERVE_PERCENTAGE;
+            throw errorTypes.INVALID_MAX_ALLOWED_PERCENTAGE;
         });
 
         // Act:
@@ -108,12 +109,12 @@ describe("POST /initialize-tables", () => {
             .post("/initialize-tables")
             .send({
                 table_count: 66,
-                max_reserve_percentage: 2,  // Invalid percentage
+                max_allowed_percentage: 2,  // Invalid percentage
             });
 
         // Assert:
         // Verify error
-        expect(response.status).toBe(errorTypes.INVALID_MAX_RESERVE_PERCENTAGE.statusCode);
-        expect(response.body.message).toBe(errorTypes.INVALID_MAX_RESERVE_PERCENTAGE.message);
+        expect(response.status).toBe(errorTypes.INVALID_MAX_ALLOWED_PERCENTAGE.statusCode);
+        expect(response.body.message).toBe(errorTypes.INVALID_MAX_ALLOWED_PERCENTAGE.message);
     });
 });
