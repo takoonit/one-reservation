@@ -29,7 +29,8 @@ const errorMessages = {
     TABLES_NOT_INITIALIZED: "Tables are not initialized yet, Please ensure to initialize the number of tables first and try again.",
     INVALID_CUSTOMER_COUNT: "Invalid customer count.",
     NOT_ENOUGH_TABLES: "Not enough tables available.",
-    MAX_RESERVATION_EXCEEDED: "Requested seats exceed the allowed limit per one reservation."
+    MAX_RESERVATION_EXCEEDED: "Requested seats exceed the allowed limit per one reservation.",
+    BOOKING_NOT_FOUND: "Booking ID Not Found."
 };
 
 /**
@@ -44,6 +45,7 @@ const errorTypes = {
     INVALID_CUSTOMER_COUNT: new AppError(errorMessages.INVALID_CUSTOMER_COUNT, 400),
     NOT_ENOUGH_TABLES: new AppError(errorMessages.NOT_ENOUGH_TABLES, 400),
     MAX_RESERVATION_EXCEEDED: (extra) => new AppError(errorMessages.MAX_RESERVATION_EXCEEDED, 400, this.extra),
+    BOOKING_NOT_FOUND: new AppError(errorMessages.NOT_ENOUGH_TABLES, 409)
 };
 
 module.exports = {
