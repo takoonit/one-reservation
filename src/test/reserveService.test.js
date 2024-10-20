@@ -1,5 +1,5 @@
 const {reserveTables} = require("../services/reserveService");
-const {reservationStorage} = require("../storage/reservationStorage");
+const {reservationStorage} = require("../storage/ReservationStorage");
 const {errorTypes} = require("../utils/errorUtils");
 const {generateBookingId} = require("../utils/bookingUtils");
 
@@ -10,7 +10,7 @@ jest.mock("../utils/bookingUtils", () => ({
 describe("ReserveService - reserveTables", () => {
     beforeEach(() => {
         reservationStorage.reset(); // Reset before each test
-        reservationStorage.initialize(100, 80); // Initialize with 100 tables, max reserve 80 seats
+        reservationStorage.initializeTables(100, 80); // Initialize with 100 tables, max reserve 80 seats
     });
 
     it("should successfully reserve tables and return booking details", async () => {
@@ -48,7 +48,7 @@ describe("ReserveService - reserveTables", () => {
 
     it("should throw error if there are not enough tables available", async () => {
         reservationStorage.reset(); // Reset before each test
-        reservationStorage.initialize(100, 0);
+        reservationStorage.initializeTables(100, 0);
         const customerCount = 500; // More than available tables (125 tables needed for 500 customers)
         const contactNo = "1234567890";
 

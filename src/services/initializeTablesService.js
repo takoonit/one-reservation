@@ -1,4 +1,4 @@
-const {reservationStorage} = require("../storage/reservationStorage");
+const {reservationStorage} = require("../storage/ReservationStorage");
 const {errorTypes} = require("../utils/errorUtils");
 const {logger} = require("../config/logger");
 
@@ -32,7 +32,7 @@ function initializeTablesService(tableCount, maxAllowedPercentage = 0) {
     const maxReserveSeats = Math.floor(tableCount * maxAllowedPercentage); 
 
     // Initialize tables and set max reserve seats based on the given percentage
-    reservationStorage.initialize(tableCount, maxReserveSeats);
+    reservationStorage.initializeStorage(tableCount, maxReserveSeats);
 
     logger.info(`Tables initialized successfully with count: ${tableCount} and maxAllowedPercentage: ${maxAllowedPercentage}`);
 
